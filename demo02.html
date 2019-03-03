@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas
+        id="canvas"
+        style="border: 1px solid #aaa;display: block;margin: 50px auto;"
+        height="600"
+        width="800">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.moveTo(100, 100)
+        ctx.lineTo(300, 300)
+        ctx.lineTo(100, 500)
+        ctx.lineWidth = 5
+        ctx.strokeStyle = '#aa394c'
+        
+        ctx.stroke()
+    </script>
+</body>
+</html>

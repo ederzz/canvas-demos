@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        style="border: 1px solid #aaa;display: block;margin: 50px auto;"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        // 为了绘制三条不同颜色的线条，使用ctx.beginPath()表示绘制的起始之处，它之后设置的绘制状态结束于：stroke/fill/closePath方法
+        // 建议每次绘制结束后使用closePath方法
+        ctx.beginPath()
+        ctx.moveTo(100, 100)
+        ctx.lineTo(300, 300)
+        ctx.lineTo(100, 500)
+        ctx.strokeStyle = '#f00'
+        ctx.lineWIdth = 5
+        ctx.stroke()
+        ctx.closePath()
+        
+        ctx.beginPath()
+        ctx.moveTo(300, 100)
+        ctx.lineTo(500, 300)
+        ctx.lineTo(300, 500)
+        ctx.strokeStyle = '#0f0'
+        ctx.lineWIdth = 5
+        ctx.stroke()
+        ctx.closePath()
+        
+        ctx.beginPath()
+        ctx.moveTo(500, 100)
+        ctx.lineTo(700, 300)
+        ctx.lineTo(500, 500)
+        ctx.strokeStyle = '#00f'
+        ctx.lineWIdth = 5
+        ctx.stroke()
+        ctx.closePath()
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        style="border: 1px solid #aaa;display: block;margin: 50px auto;"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.moveTo(100, 100)
+        ctx.lineTo(300, 300)
+        ctx.lineTo(100, 500)
+        ctx.strokeStyle = '#f00'
+        ctx.lineWIdth = 5
+        ctx.stroke()
+        
+        ctx.moveTo(300, 100)
+        ctx.lineTo(500, 300)
+        ctx.lineTo(300, 500)
+        ctx.strokeStyle = '#0f0'
+        ctx.lineWIdth = 5
+        ctx.stroke()
+        
+        ctx.moveTo(500, 100)
+        ctx.lineTo(700, 300)
+        ctx.lineTo(500, 500)
+        ctx.strokeStyle = '#00f'
+        ctx.lineWIdth = 5
+        ctx.stroke()
+
+        // canvas是基于状态的绘制，每次调用stroke都会将之前的状态重新绘制一次
+    </script>
+</body>
+</html>
