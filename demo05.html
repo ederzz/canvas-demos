@@ -19,28 +19,18 @@
         const canvas = document.querySelector('#canvas')
         const ctx = canvas.getContext('2d')
 
-        ctx.moveTo(100, 100)
-        ctx.lineTo(300, 300)
-        ctx.lineTo(100, 500)
-        ctx.strokeStyle = '#f00'
+        ctx.beginPath()
+        ctx.moveTo(150, 50)
+        ctx.lineTo(650, 50)
+        ctx.lineTo(650, 550)
+        ctx.lineTo(150, 550)
+        ctx.closePath()
         ctx.lineWidth = 5
-        ctx.stroke()
+        ctx.strokeStyle = '#aa394c'
+        ctx.fillStyle = 'yellow'
         
-        ctx.moveTo(300, 100)
-        ctx.lineTo(500, 300)
-        ctx.lineTo(300, 500)
-        ctx.strokeStyle = '#0f0'
-        ctx.lineWidth = 5
         ctx.stroke()
-        
-        ctx.moveTo(500, 100)
-        ctx.lineTo(700, 300)
-        ctx.lineTo(500, 500)
-        ctx.strokeStyle = '#00f'
-        ctx.lineWidth = 5
-        ctx.stroke()
-
-        // canvas是基于状态的绘制，每次调用stroke都会将之前的状态重新绘制一次
+        ctx.fill()
     </script>
 </body>
 </html>

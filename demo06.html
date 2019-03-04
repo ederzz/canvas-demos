@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        style="border: 1px solid #aaa;display: block;margin: 50px auto;"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        drawRect({
+            ctx,
+            x: 150,
+            y: 50,
+            width: 50,
+            height: 50,
+            fillColor: 'yellow',
+            borderColor: 'red',
+            borderWidth: 4
+        })
+        drawRect2({
+            ctx,
+            x: 250,
+            y: 50,
+            width: 100,
+            height: 50,
+            fillColor: 'green',
+            borderColor: 'blue',
+            borderWidth: 4
+        })
+
+        function drawRect({
+            ctx,
+            x,
+            y,
+            width,
+            height,
+            fillColor,
+            borderColor,
+            borderWidth
+        }) { 
+            ctx.beginPath()
+            ctx.moveTo(x, y)
+            ctx.lineTo(x + width, y)
+            ctx.lineTo(x + width, y + height)
+            ctx.lineTo(x, y + height)
+            ctx.closePath()
+            ctx.lineWidth = borderWidth
+            ctx.strokeStyle = borderColor
+            ctx.fillStyle = fillColor
+            ctx.fill()
+            ctx.stroke()
+        }
+
+        function drawRect2({
+            ctx,
+            x,
+            y,
+            width,
+            height,
+            fillColor,
+            borderColor,
+            borderWidth
+        }) { 
+            ctx.beginPath()
+            ctx.rect(x, y, width, height) // 自带方法
+            ctx.closePath()
+
+            ctx.lineWidth = borderWidth
+            ctx.strokeStyle = borderColor
+            ctx.fillStyle = fillColor
+            ctx.fill()
+            ctx.stroke()
+        }
+    </script>
+</body>
+</html>
