@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        style="border: 1px solid #aaa;display: block;margin: 50px auto;"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.lineWidth = 50
+        ctx.strokeStyle = '#1BAAAA'
+
+        ctx.beginPath()
+        ctx.lineCap = 'butt'
+        ctx.moveTo(100, 100)
+        ctx.lineTo(700, 100)
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.lineCap = 'round'
+        ctx.moveTo(100, 300)
+        ctx.lineTo(700, 300)
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.lineCap = 'square'
+        ctx.moveTo(100, 500)
+        ctx.lineTo(700, 500)
+        ctx.stroke()
+
+        // 基线
+        ctx.strokeStyle = 'black'
+        ctx.lineWidth = 3
+
+        ctx.beginPath()
+        ctx.moveTo(100, 0)
+        ctx.lineTo(100, 600)
+        ctx.moveTo(700, 0)
+        ctx.lineTo(700, 600)
+        ctx.stroke()
+    </script>
+</body>
+</html>
