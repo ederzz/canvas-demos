@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        style="border: 1px solid #aaa;display: block;margin: 50px auto;"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.lineWidth = 20
+        ctx.beginPath()
+        ctx.strokeStyle = 'red'
+        ctx.moveTo(100, 100)
+        ctx.lineTo(300, 300)
+        ctx.lineTo(100, 500)
+        ctx.lineJoin = 'miter'
+        ctx.miterLimit = 1 // 小于极限值 lineJoin属性会失效 变成bevel的效果
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.strokeStyle = 'blue'
+        ctx.moveTo(300, 100)
+        ctx.lineTo(500, 300)
+        ctx.lineTo(300, 500)
+        ctx.lineJoin = 'bevel'
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.strokeStyle = 'yellow'
+        ctx.moveTo(500, 100)
+        ctx.lineTo(700, 300)
+        ctx.lineTo(500, 500)
+        ctx.lineJoin = 'round'
+        ctx.stroke()
+        
+    </script>
+</body>
+</html>
