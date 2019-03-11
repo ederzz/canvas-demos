@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid #aaa;
+            display: block;
+            margin: 50px auto;
+        }
+        body {
+            background: url('./imgs/deer.jpg') repeat;
+        }
+    </style>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.fillStyle = '#fff'
+        ctx.strokeStyle = 'red'
+        ctx.fillRect(0, 0, 800, 600)
+
+        drawRoundRect(ctx, 200, 100, 400, 400, 50)
+        ctx.strokeStyle = '#0078AA'
+        ctx.stroke()
+
+        function drawRoundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath()
+            ctx.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2)
+            ctx.lineTo(x + width - radius, y)
+            ctx.arc(x + width - radius, y + radius, radius, Math.PI * 3 / 2, Math.PI * 2)
+            ctx.lineTo(x + width, y + height - radius)
+            ctx.arc(x + width - radius, y + height - radius, radius, 0, Math.PI / 2)
+            ctx.lineTo(x + radius, y + height)
+            ctx.arc(x + radius, y + height - radius, radius, Math.PI / 2, Math.PI)
+            ctx.lineTo(x, y + radius)
+            ctx.closePath()
+        }
+    </script>
+</body>
+</html>
