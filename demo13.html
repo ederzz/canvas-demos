@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        style="border: 1px solid #aaa;display: block;margin: 50px auto;"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        const grd = ctx.createRadialGradient(400, 300, 100, 400, 300, 200)
+
+        grd.addColorStop(0, 'olive')
+        grd.addColorStop(0.25, 'maroon')
+        grd.addColorStop(0.5, 'aqua')
+        grd.addColorStop(0.75, 'fuchsia')
+        grd.addColorStop(1, 'teal')
+
+        ctx.fillStyle = grd
+
+        ctx.fillRect(100, 100, 600, 400)
+    </script>
+</body>
+</html>
