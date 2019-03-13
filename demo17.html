@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body { background: url("./images/bg3.jpg") repeat; }
+        #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
+    </style>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+        
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, 800, 600)
+
+        drawArcTo(ctx, 200, 200, 600, 200, 600, 400, 100)
+
+        function drawArcTo(ctx, x0, y0, x1, y1, x2, y2, r) {
+            ctx.beginPath()
+            ctx.moveTo(x0, y0)
+
+            ctx.arcTo(x1, y1, x2, y2, r)
+            ctx.lineWidth = 6
+            ctx.strokeStyle = 'red'
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.moveTo(x0, y0)
+            ctx.lineTo(x1, y1)
+            ctx.lineTo(x2, y2)
+            ctx.strokeStyle = '#0088AA'
+            ctx.lineWidth = 1
+            ctx.stroke()
+        }
+    </script>
+</body>
+</html>
