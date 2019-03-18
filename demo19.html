@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body { background: url("./imgs/deer.jpg") repeat; }
+        #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
+    </style>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, 800, 600)
+
+        drawPrairie(ctx)
+        drawSky(ctx)
+        for (var i = 0; i < 5; i++ ) {
+            var x0 = 500 * Math.random() + 50
+            var y0 = 200 * Math.random() + 50
+            var c0 = 100 * Math.random() + 50
+            drawCloud(ctx, x0, y0, c0)
+        }
+
+        function drawSky(ctx) {
+            ctx.save()
+
+            ctx.beginPath()
+            ctx.moveTo(0, 420)
+            ctx.bezierCurveTo(250, 300, 350, 550, 800, 400)
+            ctx.lineTo(800, 0)
+            ctx.lineTo(0, 0)
+            ctx.closePath()
+
+            const fillColor = ctx.createRadialGradient(400, 0, 50, 400, 0, 200)
+            fillColor.addColorStop(0, '#42a9aa')
+            fillColor.addColorStop(1, '#2491aa')
+            ctx.fillStyle = fillColor
+            ctx.fill()
+        }
+
+        function drawPrairie(ctx) {
+            ctx.save()
+
+            ctx.beginPath()
+            ctx.moveTo(0, 420)
+            ctx.bezierCurveTo(250, 300, 350, 550, 800, 400)
+            ctx.lineTo(800, 600)
+            ctx.lineTo(0, 600)
+            ctx.closePath()
+
+            const fillColor = ctx.createLinearGradient(0, 600, 600, 0)
+            fillColor.addColorStop(0, '#00aa58')
+            fillColor.addColorStop(0.3, '#63aa7b')
+            fillColor.addColorStop(1, '#04aa00')
+
+            ctx.fillStyle = fillColor
+            ctx.fill()
+        }
+
+        function drawCloud(ctx, cx, cy, cw) {
+            const maxWidth = 800
+            const ch = cw * .6
+            cx = cx % 800
+
+            ctx.beginPath()
+            const grd = ctx.createLinearGradient(0, 0, 0, cy)
+            grd.addColorStop(0, 'rgba(255, 255, 255, .8)')
+            grd.addColorStop(1, 'rgba(255, 255, 255, .5)')
+            ctx.fillStyle = grd
+
+            ctx.arc(cx, cy, cw * .19, 0, 2 * Math.PI, false)
+            ctx.arc(cx + cw * .08, cy - ch * .3, cw * .11, 0, 2 * Math.PI, false)
+            ctx.arc(cx + cw * .3, cy - ch * .25, cw * .25, 0, 2 * Math.PI, false)
+            ctx.arc(cx + cw * .6, cy, cw * .21, 0, 2 * Math.PI, false)
+            ctx.arc(cx + cw * .3, cy - ch * .1, cw * .28, 0, 2 * Math.PI, false)
+            ctx.closePath()
+
+            ctx.fill()
+        }
+    </script>
+</body>
+</html>
