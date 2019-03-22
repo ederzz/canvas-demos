@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body { background: url("./imgs/deer.jpg") repeat; }
+        #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
+    </style>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        // ctx.transform(a, b, c, d, e, f) a:水平缩放 b:水平倾斜 c:垂直倾斜 d:垂直缩放 e:水平位移 f:垂直位移
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, 800, 600)
+        ctx.save()
+        ctx.strokeStyle = 'green'
+        ctx.lineWidth = 5
+        ctx.transform(1, 0, 0, 1, 100, 100)
+        ctx.strokeRect(0, 0, 100, 100)
+        ctx.restore()
+        ctx.save()
+        ctx.strokeStyle = 'red'
+        ctx.transform(0, 1, 1, 0, 100, 100)
+        ctx.strokeRect(0, 0, 200, 200)
+        ctx.restore()
+    </script>
+</body>
+</html>
