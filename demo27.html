@@ -19,24 +19,30 @@
     </canvas>
 
     <script>
-        // ctx.transform(a, b, c, d, e, f) a:水平缩放 b:水平倾斜 c:垂直倾斜 d:垂直缩放 e:水平位移 f:垂直位移
         const canvas = document.querySelector('#canvas')
         const ctx = canvas.getContext('2d')
 
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, 800, 600)
 
-        ctx.fillStyle = 'yellow'
-        ctx.strokeStyle = '#00aaaa'
-        ctx.lineWidth = 5
+        ctx.strokeStyle = 'blue'
+        ctx.moveTo(0, 300)
+        ctx.lineTo(800, 300)
+        ctx.stroke()
 
-        ctx.save()
-        ctx.transform(1, 0, 0, 1, 300, 200)
-        ctx.transform(2, 0, 0, 1.5, 0, 0)
-        ctx.transform(1, -0.1, 0.1, 1, 0, 0)
-        ctx.fillRect(0, 0, 200, 200)
-        ctx.strokeRect(0, 0, 200, 200)
-        ctx.restore()
+        ctx.font = '20px Arial'
+        ctx.fillStyle = '#00aaaa'
+
+        ctx.textBaseline = 'top'
+        ctx.fillText('Top', 150, 300)
+        ctx.textBaseline = 'bottom'
+        ctx.fillText('Bottom', 250, 300)
+        ctx.textBaseline = 'middle'
+        ctx.fillText('Middle', 350, 300)
+        ctx.textBaseline = 'alphabehic'
+        ctx.fillText('Alphabehic', 450, 300)
+        ctx.textBaseline = 'hanging'
+        ctx.fillText('Hanging', 550, 300)
     </script>
 </body>
 </html>

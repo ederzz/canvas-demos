@@ -19,24 +19,32 @@
     </canvas>
 
     <script>
-        // ctx.transform(a, b, c, d, e, f) a:水平缩放 b:水平倾斜 c:垂直倾斜 d:垂直缩放 e:水平位移 f:垂直位移
         const canvas = document.querySelector('#canvas')
         const ctx = canvas.getContext('2d')
 
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, 800, 600)
 
-        ctx.fillStyle = 'yellow'
+        ctx.beginPath()
+        ctx.font = '50px Verdana'
+        const grad = ctx.createLinearGradient(0, 0, 800, 0)
+        grad.addColorStop('0', 'magenta')
+        grad.addColorStop('0.5', 'blue')
+        grad.addColorStop('1', 'red')
+        ctx.fillStyle = grad
         ctx.strokeStyle = '#00aaaa'
-        ctx.lineWidth = 5
+        ctx.strokeText('airingursb.github.io', 50, 100)
+        ctx.fillText('airingursb.github.io', 50, 200)
+        ctx.fillText('airingursb.github.io', 50, 300, 200)
 
-        ctx.save()
-        ctx.transform(1, 0, 0, 1, 300, 200)
-        ctx.transform(2, 0, 0, 1.5, 0, 0)
-        ctx.transform(1, -0.1, 0.1, 1, 0, 0)
-        ctx.fillRect(0, 0, 200, 200)
-        ctx.strokeRect(0, 0, 200, 200)
-        ctx.restore()
+        ctx.beginPath()
+        const img = new Image()
+        img.src = './imgs/deer.jpg'
+        img.onload = function () {
+            const pattern = ctx.createPattern(img, 'repeat')
+            ctx.fillStyle = pattern
+            ctx.fillText('airingursb.github.io', 50, 400, 200)
+        }
     </script>
 </body>
 </html>

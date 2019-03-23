@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body { background: url("./imgs/deer.jpg") repeat; }
+        #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
+    </style>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, 800, 600)
+
+        ctx.save()
+        const txt = 'Hello Canvas'
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+        ctx.font = '30px Arial'
+        ctx.fillStyle = '#00aaaa'
+        ctx.fillText(txt, 400, 250)
+        ctx.fillText('width:' + ctx.measureText(txt).width, 400, 300)
+        ctx.restore()
+
+        ctx.strokeStyle = 'red'
+        ctx.strokeRect(100, 250, 100, 200)
+        ctx.font = '30px Arial'
+        ctx.fillStyle = '#00aaaa'
+        ctx.textBaseline = 'top'
+        wrapText(ctx, 100, 250, 'hello, canvas.', 100, 30)
+
+        function wrapText(ctx, x, y, txt, width, lineHeight) {
+            let length = txt.length
+            let lineTxt = ''
+
+            if (typeof lineHeight !== 'number') {
+                lineHeight = 
+                    parseInt(window.getComputedStyle(canvas).lineHeight) || 
+                    parseInt(window.getComputedStyle(document.body).lineHeight)
+                console.log('默认lineHeight:' + lineHeight)
+            }
+
+            for (let i = 1;i <= length;i++) {
+                lineTxt = txt.slice(0, i)
+                if (ctx.measureText(lineTxt).width > width) {
+                    ctx.fillText(
+                        txt.slice(0, i - 1), 
+                        x, 
+                        y
+                    )
+
+                    txt = txt.slice(i - 1)
+                    length = txt.length
+                    y += lineHeight
+                    i = 0
+                }
+            }
+            ctx.fillText(txt, x, y)
+        }
+    </script>
+</body>
+</html>
