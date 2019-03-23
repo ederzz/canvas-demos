@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body { background: url("./imgs/deer.jpg") repeat; }
+        #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
+    </style>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, 800, 600)
+
+        ctx.save()
+        ctx.shadowColor = 'red'
+        ctx.shadowOffsetX = 10
+        ctx.shadowOffsetY = 10
+        ctx.shadowBlur = 10
+        ctx.globalAlpha = .5
+        ctx.fillStyle = 'green'
+        ctx.fillRect(10, 10, 100, 100)
+        ctx.restore()
+
+        ctx.globalAlpha = .5
+        for (let i = 0;i < 50;i++) {
+            const r = Math.random() * 255 >> 0
+            const g = Math.random() * 255 >> 0
+            const b = Math.random() * 255 >> 0
+            const x = Math.random() * canvas.width >> 0
+            const y = Math.random() * canvas.height >> 0
+            const radius = Math.random() * 50 >> 0
+            
+            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`
+            ctx.beginPath()
+            ctx.arc(x, y, radius, 0, 2 * Math.PI)
+            ctx.fill()
+        }
+    </script>
+</body>
+</html>
