@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: url("./imgs/deer.jpg") repeat;
+        }
+
+        #canvas {
+            border: 1px solid #aaaaaa;
+            display: block;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="800" height="600" id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, 800, 600)
+
+        ctx.save()
+        ctx.beginPath()
+        ctx.shadowColor = '#00aaaa'
+        ctx.shadowOffsetX = 5
+        ctx.shadowOffsetY = 5
+        ctx.shadowBlur = 2
+
+        ctx.fillStyle = 'green'
+        ctx.arc(600, 300, 100, 0, 2 * Math.PI, true)
+        ctx.arc(600, 300, 80, 0, 2 * Math.PI, false)
+        ctx.fill()
+        ctx.restore()
+
+        ctx.beginPath()
+        ctx.fillStyle = '#bcedaf'
+        ctx.rect(100, 200, 300, 300)
+        drawPathRect(ctx, 120, 220, 260, 130)
+        drawPathTriangle(ctx, 200, 370, 280, 480, 120, 480)
+        ctx.fill()
+
+        function drawPathRect(cxt, x, y, w, h) {
+            /**
+             * 这里不能使用beginPath和closePath，
+             * 不然就不属于子路径而是另一个全新的路径，
+             * 无法使用非零环绕原则
+             */
+            cxt.moveTo(x, y);
+            cxt.lineTo(x, y + h);
+            cxt.lineTo(x + w, y + h);
+            cxt.lineTo(x + w, y);
+            cxt.lineTo(x, y);
+
+        }
+
+        function drawPathTriangle(cxt, x1, y1, x2, y2, x3, y3) {
+            cxt.moveTo(x1, y1);
+            cxt.lineTo(x3, y3);
+            cxt.lineTo(x2, y2);
+            cxt.lineTo(x1, y1);
+        }
+
+    </script>
+</body>
+
+</html>
