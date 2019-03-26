@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        body { background: url("./imgs/deer.jpg") repeat; }
+        body { background: url("../imgs/deer.jpg") repeat; }
         #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
     </style>
 </head>
@@ -22,22 +22,27 @@
         const canvas = document.querySelector('#canvas')
         const ctx = canvas.getContext('2d')
 
-        ctx.beginPath()
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, 800, 600)
 
+        ctx.strokeStyle = 'blue'
+        ctx.moveTo(0, 300)
+        ctx.lineTo(800, 300)
+        ctx.stroke()
+
+        ctx.font = '20px Arial'
         ctx.fillStyle = '#00aaaa'
-        ctx.fillRect(100, 100, 200, 100)
 
-        ctx.save()
-        ctx.fillStyle = 'red'
-        ctx.translate(100, 100)
-        ctx.fillRect(100, 100, 200, 100)
-        ctx.restore()
-
-        ctx.fillStyle = 'green'
-        ctx.translate(200, 200)
-        ctx.fillRect(100, 100, 200, 100)
+        ctx.textBaseline = 'top'
+        ctx.fillText('Top', 150, 300)
+        ctx.textBaseline = 'bottom'
+        ctx.fillText('Bottom', 250, 300)
+        ctx.textBaseline = 'middle'
+        ctx.fillText('Middle', 350, 300)
+        ctx.textBaseline = 'alphabehic'
+        ctx.fillText('Alphabehic', 450, 300)
+        ctx.textBaseline = 'hanging'
+        ctx.fillText('Hanging', 550, 300)
     </script>
 </body>
 </html>

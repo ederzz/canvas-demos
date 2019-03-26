@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        body { background: url("./imgs/deer.jpg") repeat; }
+        body { background: url("../imgs/deer.jpg") repeat; }
         #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
     </style>
 </head>
@@ -16,7 +16,7 @@
         height="600"
         id="canvas">
         您的浏览器不支持canvas!
-    </canvas>
+    </canvas>    
 
     <script>
         const canvas = document.querySelector('#canvas')
@@ -24,25 +24,21 @@
 
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, 800, 600)
+        ctx.lineWidth = 5
 
-        ctx.strokeStyle = 'blue'
-        ctx.moveTo(0, 300)
-        ctx.lineTo(800, 300)
-        ctx.stroke()
-
-        ctx.font = '20px Arial'
-        ctx.fillStyle = '#00aaaa'
-
-        ctx.textBaseline = 'top'
-        ctx.fillText('Top', 150, 300)
-        ctx.textBaseline = 'bottom'
-        ctx.fillText('Bottom', 250, 300)
-        ctx.textBaseline = 'middle'
-        ctx.fillText('Middle', 350, 300)
-        ctx.textBaseline = 'alphabehic'
-        ctx.fillText('Alphabehic', 450, 300)
-        ctx.textBaseline = 'hanging'
-        ctx.fillText('Hanging', 550, 300)
+        for (let i = 1;i < 4;i++) {
+            ctx.save()
+            ctx.strokeStyle = 'red'
+            ctx.scale(i, i)
+            ctx.strokeRect(0, 0, 80, 40)
+            ctx.restore()
+            
+            ctx.save()
+            ctx.strokeStyle = 'green'
+            ctx.scale(i, i)
+            ctx.strokeRect(120, 150, 80, 40)
+            ctx.restore()
+        }
     </script>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        body { background: url("./imgs/deer.jpg") repeat; }
+        body { background: url("../imgs/deer.jpg") repeat; }
         #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
     </style>
 </head>
@@ -19,24 +19,24 @@
     </canvas>
 
     <script>
-        // ctx.transform(a, b, c, d, e, f) a:水平缩放 b:水平倾斜 c:垂直倾斜 d:垂直缩放 e:水平位移 f:垂直位移
         const canvas = document.querySelector('#canvas')
         const ctx = canvas.getContext('2d')
 
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, 800, 600)
 
-        ctx.fillStyle = 'yellow'
-        ctx.strokeStyle = '#00aaaa'
-        ctx.lineWidth = 5
+        ctx.moveTo(200, 120)
+        ctx.bezierCurveTo(220, 60, 400, 120, 200, 240)
+        ctx.moveTo(200, 120)
+        ctx.bezierCurveTo(180, 60, 0, 120, 200, 240)
+        ctx.clip()
+        ctx.closePath()
 
-        ctx.save()
-        ctx.transform(1, 0, 0, 1, 300, 200)
-        ctx.transform(2, 0, 0, 1.5, 0, 0)
-        ctx.transform(1, -0.1, 0.1, 1, 0, 0)
-        ctx.fillRect(0, 0, 200, 200)
-        ctx.strokeRect(0, 0, 200, 200)
-        ctx.restore()
+        const img = new Image()
+        img.src = './imgs/deer.jpg'
+        img.onload = function () {
+            ctx.drawImage(img, 80, 80, 300, 300)
+        }
     </script>
 </body>
 </html>

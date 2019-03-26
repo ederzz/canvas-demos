@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        body { background: url("./imgs/deer.jpg") repeat; }
+        body { background: url("../imgs/deer.jpg") repeat; }
         #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
     </style>
 </head>
@@ -25,16 +25,29 @@
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, 800, 600)
 
-        for (let i = 0; i <= 12; i++ ) {
-            ctx.save()
-            ctx.translate(100 + i * 30, 100 + i * 30)
-            ctx.fillStyle = 'green'
-            ctx.fillRect(0, 0, 20, 20)
-            ctx.rotate(Math.PI / 6 * i)
-            ctx.fillStyle = 'red'
-            ctx.fillRect(0, 0, 20, 20)
-            ctx.restore()
-        }
+        ctx.fillStyle = 'black'
+        ctx.fillRect(10, 10, 200, 200)
+        ctx.save()
+        ctx.beginPath()
+        ctx.rect(10, 10, 50, 50)
+        ctx.clip()
+
+        ctx.beginPath()
+        ctx.strokeStyle = 'red'
+        ctx.lineWidth = 5
+        ctx.arc(100, 100, 100, 0, 2 * Math.PI)
+        ctx.stroke()
+        ctx.restore()
+
+        ctx.beginPath()
+        ctx.rect(0, 0, 500, 500)
+        ctx.clip()
+
+        ctx.beginPath()
+        ctx.strokeStyle = 'blue'
+        ctx.arc(100, 100, 50, 0, 2 * Math.PI)
+
+        ctx.stroke()
     </script>
 </body>
 </html>

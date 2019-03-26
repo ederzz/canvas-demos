@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        body { background: url("./imgs/deer.jpg") repeat; }
+        body { background: url("../imgs/deer.jpg") repeat; }
         #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
     </style>
 </head>
@@ -25,17 +25,25 @@
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, 800, 600)
 
-        ctx.moveTo(200, 120)
-        ctx.bezierCurveTo(220, 60, 400, 120, 200, 240)
-        ctx.moveTo(200, 120)
-        ctx.bezierCurveTo(180, 60, 0, 120, 200, 240)
-        ctx.clip()
-        ctx.closePath()
+        ctx.beginPath()
+        ctx.font = '50px Verdana'
+        const grad = ctx.createLinearGradient(0, 0, 800, 0)
+        grad.addColorStop('0', 'magenta')
+        grad.addColorStop('0.5', 'blue')
+        grad.addColorStop('1', 'red')
+        ctx.fillStyle = grad
+        ctx.strokeStyle = '#00aaaa'
+        ctx.strokeText('airingursb.github.io', 50, 100)
+        ctx.fillText('airingursb.github.io', 50, 200)
+        ctx.fillText('airingursb.github.io', 50, 300, 200)
 
+        ctx.beginPath()
         const img = new Image()
         img.src = './imgs/deer.jpg'
         img.onload = function () {
-            ctx.drawImage(img, 80, 80, 300, 300)
+            const pattern = ctx.createPattern(img, 'repeat')
+            ctx.fillStyle = pattern
+            ctx.fillText('airingursb.github.io', 50, 400, 200)
         }
     </script>
 </body>

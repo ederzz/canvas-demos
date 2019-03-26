@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        body { background: url("./imgs/deer.jpg") repeat; }
+        body { background: url("../imgs/deer.jpg") repeat; }
         #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
     </style>
 </head>
@@ -19,31 +19,24 @@
     </canvas>
 
     <script>
+        // ctx.transform(a, b, c, d, e, f) a:水平缩放 b:水平倾斜 c:垂直倾斜 d:垂直缩放 e:水平位移 f:垂直位移
         const canvas = document.querySelector('#canvas')
         const ctx = canvas.getContext('2d')
-        
+
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, 800, 600)
 
-        drawArcTo(ctx, 200, 200, 600, 200, 600, 400, 100)
+        ctx.fillStyle = 'yellow'
+        ctx.strokeStyle = '#00aaaa'
+        ctx.lineWidth = 5
 
-        function drawArcTo(ctx, x0, y0, x1, y1, x2, y2, r) {
-            ctx.beginPath()
-            ctx.moveTo(x0, y0)
-
-            ctx.arcTo(x1, y1, x2, y2, r)
-            ctx.lineWidth = 6
-            ctx.strokeStyle = 'red'
-            ctx.stroke()
-
-            ctx.beginPath()
-            ctx.moveTo(x0, y0)
-            ctx.lineTo(x1, y1)
-            ctx.lineTo(x2, y2)
-            ctx.strokeStyle = '#0088AA'
-            ctx.lineWidth = 1
-            ctx.stroke()
-        }
+        ctx.save()
+        ctx.transform(1, 0, 0, 1, 300, 200)
+        ctx.transform(2, 0, 0, 1.5, 0, 0)
+        ctx.transform(1, -0.1, 0.1, 1, 0, 0)
+        ctx.fillRect(0, 0, 200, 200)
+        ctx.strokeRect(0, 0, 200, 200)
+        ctx.restore()
     </script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body { background: url("../imgs/deer.jpg") repeat; }
+        #canvas { border: 1px solid #aaaaaa; display: block; margin: 50px auto; }
+    </style>
+</head>
+<body>
+    <canvas 
+        width="800"
+        height="600"
+        id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.beginPath()
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, 800, 600)
+
+        ctx.fillStyle = '#00aaaa'
+        ctx.fillRect(100, 100, 200, 100)
+
+        ctx.save()
+        ctx.fillStyle = 'red'
+        ctx.translate(100, 100)
+        ctx.fillRect(100, 100, 200, 100)
+        ctx.restore()
+
+        ctx.fillStyle = 'green'
+        ctx.translate(200, 200)
+        ctx.fillRect(100, 100, 200, 100)
+    </script>
+</body>
+</html>

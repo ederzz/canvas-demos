@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background: url("./imgs/deer.jpg") repeat;
+        }
+
+        #canvas {
+            border: 1px solid #aaaaaa;
+            display: block;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="800" height="600" id="canvas">
+        您的浏览器不支持canvas!
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+        canvas.addEventListener('mousemove', dect)
+
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, 800, 600)
+        const balls = []
+
+        for (let i = 0;i++ < 50;) {
+            let x = Math.random() * 800 >> 0
+            let y = Math.random() * 600 >> 0
+            let r = Math.random() * 50 + 20
+            balls.push({
+                x,
+                y,
+                r
+            })
+        }
+
+        draw()
+        function draw() {
+            ctx.globalAlpha = 0.5
+            for (let i = 0, ball;ball = balls[i++];) {
+                ctx.beginPath()
+                ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI)
+                
+                let r = Math.random() * 255 >> 0
+                let g = Math.random() * 255 >> 0
+                let b = Math.random() * 255 >> 0
+                ctx.fillStyle = `rgb(${r}, ${g}, ${b})`
+
+                ctx.fill()
+            }
+        }
+
+        function dect({
+            clientX,
+            clientY
+        }) {
+            const x = clientX - canvas.getBoundingClientRect().left
+            const y = clientY - canvas.getBoundingClientRect().top
+
+            for (let i= 0, ball;ball = balls[i++];) {
+                ctx.beginPath()
+                ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI)
+
+                if (ctx.isPointInPath(x, y)) {
+                    ctx.fillStyle = 'rgba(255, 255, 255, .1)'
+                    ctx.fill()
+                }
+            }
+        }
+    </script>
+</body>
+</html>

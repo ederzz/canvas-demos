@@ -12,7 +12,7 @@
             margin: 50px auto;
         }
         body {
-            background: url('./imgs/deer.jpg') repeat;
+            background: url('../imgs/deer.jpg') repeat;
         }
     </style>
 </head>
@@ -29,21 +29,12 @@
         const ctx = canvas.getContext('2d')
 
         ctx.fillStyle = '#fff'
+        ctx.strokeStyle = 'red'
         ctx.fillRect(0, 0, 800, 600)
 
-        ctx.beginPath()
-        ctx.fillStyle = "#AA7B41"
-        ctx.strokeStyle = "#0078AA"
-        ctx.fillRect(250, 150, 300, 300)
-
-        ctx.fillStyle = "#CCBFB4"
-        ctx.strokeStyle = "#0078AA"
-        let i = 0
-        for (; i < 9; i++ ) {
-            drawRoundRect(ctx, 260 + 100 * (i % 3), 160 + 100 * (i / 3 >> 0), 80, 80, 4)
-            ctx.fill()
-            ctx.stroke()
-        }
+        drawRoundRect(ctx, 200, 100, 400, 400, 50)
+        ctx.strokeStyle = '#0078AA'
+        ctx.stroke()
 
         function drawRoundRect(ctx, x, y, width, height, radius) {
             ctx.beginPath()
