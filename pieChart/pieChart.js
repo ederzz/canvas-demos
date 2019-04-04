@@ -21,7 +21,7 @@ const data = [
     }
 ]
 drawPieChart(data, {
-    radius: 200
+    radius: [100, 200]
 })
 
 function drawPieChart(data, opts) {
@@ -33,10 +33,20 @@ function drawPieChart(data, opts) {
         x: canvasW / 2,
         y: canvasH / 2
     }
+    let inRadius
+    let outRadius
 
     const {
         radius
     } = opts
+
+    if (Array.isArray(radius)) {
+        inRadius = radius[0]
+        outRadius = radius[1]
+    }
+    if (typeof radius === 'number') {
+        outRadius = radius
+    }
 
     const colors = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
 
@@ -48,12 +58,25 @@ function drawPieChart(data, opts) {
         drawSector({
             ctx,
             color: colors[i],
-            r: radius,
+            r: outRadius,
             deg: d.scale
         })
         ctx.rotate(d.scale)
     }
     ctx.restore()
+    if (inRadius) {
+        drawCircle({
+            origin,
+            color: '#fff',
+            ctx,
+            radius: inRadius
+        })
+    }
+    animate({
+        origin,
+        radius: 200,
+        ctx
+    })
 }
 
 /**
@@ -85,4 +108,24 @@ function drawSector({
     ctx.arc(0, 0, r, 0, deg)
     ctx.closePath()
     ctx.fill()
+}
+
+function drawCircle({
+    ctx,
+    origin,
+    radius,
+    color
+}) {
+    ctx.beginPath()
+    ctx.arc(origin.x, origin.y, radius, 0, 2 * Math.PI)
+    ctx.fillStyle = color
+    ctx.fill()
+    ctx.closePath()
+}
+
+function animate({
+    ctx,
+    origin,
+    radius
+}) {
 }
