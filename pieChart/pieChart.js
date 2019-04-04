@@ -21,7 +21,8 @@ const data = [
     }
 ]
 drawPieChart(data, {
-    radius: [100, 200]
+    // radius: [100, 200]
+    radius: 200
 })
 
 function drawPieChart(data, opts) {
@@ -49,21 +50,12 @@ function drawPieChart(data, opts) {
     }
 
     const colors = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
+    let step = 100
+    let stepIndex = 1
 
     calcDeg(data)
-    ctx.save()
-    ctx.translate(origin.x, origin.y)
-    for (let i = 0, d; i < data.length; i++) {
-        d = data[i]
-        drawSector({
-            ctx,
-            color: colors[i],
-            r: outRadius,
-            deg: d.scale
-        })
-        ctx.rotate(d.scale)
-    }
-    ctx.restore()
+    drawPie()
+
     if (inRadius) {
         drawCircle({
             origin,
@@ -72,12 +64,37 @@ function drawPieChart(data, opts) {
             radius: inRadius
         })
     }
-    animate({
-        origin,
-        radius: 200,
-        ctx
-    })
+    const timer = setInterval(() => {
+        drawPie()
+        stepIndex++
+        if (stepIndex > step) {
+            clearInterval(timer)
+        }
+    }, 10)
+
+    function drawPie() {
+        let startAngle = 0
+        let endAngle = 0
+        ctx.save()
+        ctx.translate(origin.x, origin.y)
+        for (let i = 0, d; i < data.length; i++) {
+            d = data[i]
+            const currentAngle = d.angle * stepIndex / step
+            endAngle += currentAngle
+            drawSector({
+                ctx,
+                color: colors[i],
+                r: outRadius,
+                startAngle,
+                endAngle,
+                deg: d.angle
+            })
+            startAngle += currentAngle
+        }
+        ctx.restore()
+    }
 }
+
 
 /**
  * 计算数据项所占的角度
@@ -86,7 +103,7 @@ function drawPieChart(data, opts) {
 function calcDeg(data) {
     const totalVal = data.reduce((t, item) => t + item.value, 0)
     data.forEach(item => {
-        item.scale = item.value / totalVal * 2 * Math.PI
+        item.angle = item.value / totalVal * 2 * Math.PI
     })
 }
 
@@ -100,12 +117,14 @@ function drawSector({
     ctx,
     deg,
     r,
-    color
+    color,
+    startAngle,
+    endAngle
 }) {
     ctx.beginPath()
     ctx.fillStyle = color
     ctx.moveTo(0, 0)
-    ctx.arc(0, 0, r, 0, deg)
+    ctx.arc(0, 0, r, startAngle, endAngle)
     ctx.closePath()
     ctx.fill()
 }
