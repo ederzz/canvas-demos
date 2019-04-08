@@ -1,6 +1,14 @@
+/**
+ * TODO:
+ * 1.网格线格式
+ * 2.网格线开关
+ * 3.重绘调研：目前太过粗暴
+ */
+
 function drawBarChart({
     data,
-    xAxisData
+    xAxisData,
+    showLabel = true
 }) {
     const canvas = document.querySelector('canvas')
     const ctx = canvas.getContext('2d')
@@ -32,6 +40,10 @@ function drawBarChart({
 
     // 柱条相关属性
     const barColors = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'] // 柱条颜色
+    const labelFontProp = { // 标签字体属性
+        fontSize: 20,
+        color: '#bbb'
+    }
     const lightBarColors = barColors.map(cor => LightenDarkenColor(cor, 30))
     const barW = (chartW / data.length - barMargin) >> 0 // 柱条宽度
 
@@ -134,6 +146,9 @@ function drawBarChart({
             stepIndex++
             (function (stepIndex) {
                 setTimeout(() => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+                    drawAxis({ origin, xAxisEnd, yAxisEnd, xAxisData })
+                    drawGrid()
                     drawSeriesStep({ stepIndex, step, data, barW })
                 }, animationDuration * stepIndex / step)
             })(stepIndex)
@@ -153,13 +168,15 @@ function drawBarChart({
             const lightColor = lightBarColors[i % barColors.length]
 
             const height = barH(value, maxVal, chartH * stepIndex / step)
+            const valLabel = value * stepIndex / step >> 0
             drawBar(
                 origin.x + barMargin / 2 + i * (barW + barMargin),
                 origin.y - height,
                 barW,
                 height,
                 color,
-                lightColor
+                lightColor,
+                valLabel
             )
         }
     }
@@ -173,15 +190,45 @@ function drawBarChart({
      * @param {string} color 柱状体颜色
      * @param {string} emphsisColor 柱状体hover颜色
      */
-    function drawBar(x, y, width, height, color, emphsisColor) {
+    function drawBar(x, y, width, height, color, emphsisColor, valLabel) {
         ctx.beginPath()
         ctx.rect(x, y, width, height)
+        if (showLabel) {
+            drawBarLabel({
+                x: x + width / 2,
+                y,
+                label: valLabel,
+                ...labelFontProp
+            })
+        }
         if (ctx.isPointInPath(mousePos.x, mousePos.y)) {
             ctx.fillStyle = emphsisColor
         } else {
             ctx.fillStyle = color
         }
         ctx.fill()
+    }
+
+    /**
+     * 绘制柱状体标签
+     * @param {string} label 标签 
+     * @param {number} x 标签x坐标
+     * @param {number} y 标签y坐标
+     * @param {number} fontSize 标签字体大小
+     * @param {string} color 标签颜色
+     */
+    function drawBarLabel({
+        label,
+        x,
+        y,
+        fontSize = 18,
+        color = '#ff0'
+    }) {
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'bottom'
+        ctx.fillStyle = color
+        ctx.font = `${fontSize}px Arial`
+        ctx.fillText(label, x, y)
     }
 
     /**
